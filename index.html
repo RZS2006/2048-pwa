@@ -4,7 +4,68 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>2048+ | 2048 Game PWA</title>
 	</head>
-	<body></body>
+	<body>
+		<nav class="nav"">
+			<div class="container">
+				<span>&#8249; Menu</span>
+				<span>Best Score: 0000</span>
+			</div>
+		</nav>
+
+        <main>
+
+            <div class="menu">
+                <div class="container">
+                    <div class="menu-wrapper">
+                    <h1 class="menu__title">2048<span>+</span></h1>
+                    <div class="menu__input-group">
+                        <label class="menu_label" for="base-number"></label>
+                        <input class="menu_input" type="text" name="base-number">
+                    </div>
+                    <button class="menu__button button">New Game</button>
+                </div>
+                </div>
+            </div>
+
+            <div class="game-over">
+                <div class="overlay"></div>
+                <div class="container">
+                    <div class="game-over-wrapper">
+                        <h2 class="game-over__result">Game Over!</h2>
+                        <div class="game-over__stats">
+                            <span>Score: 0000</span>
+                            <span>Moves: 0000</span>
+                        </div>
+                        <button class="game-over__button button">Keep Playing</button>
+                        <button class="game-over__button button">Play Again</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game">
+                <div class="container">
+                    <div class="game-grid">
+                        <div class="game-grid__tile">2</div>
+                        <div class="game-grid__tile">4</div>
+                        <div class="game-grid__tile">8</div>
+                        <div class="game-grid__tile">16</div>
+                        <div class="game-grid__tile">32</div>
+                        <div class="game-grid__tile">64</div>
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <div class="container">
+                        <div class="game-controls__button">&#8249;</div>
+                        <div class="game-controls__button">&#8963;</div>
+                        <div class="game-controls__button">&#8964;</div>
+                        <div class="game-controls__button">&#8250;</div>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+	</body>
 </html>
