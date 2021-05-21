@@ -5,67 +5,105 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>2048+ | 2048 Game PWA</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./styles/main.css" />
 	</head>
+
 	<body>
-		<nav class="nav"">
-			<div class="container">
-				<span>&#8249; Menu</span>
-				<span>Best Score: 0000</span>
-			</div>
-		</nav>
+		<div class="body-wrapper">
+			<nav class="nav">
+				<div class="container">
+					<span class="nav__back-link nav__back-link--menu">&#8249; Menu</span>
+                    <span class="nav__back-link nav__back-link--game">&#8249; Game</span>
+					<span class="nav__best-score">Best Score: <span>0000</span><span>
+				</div>
+			</nav>
 
-        <main>
+			<main class="main">
+				<div class="menu">
+					<div class="container">
+						<div class="menu-wrapper">
+							<h1 class="menu__title">2048<span>+</span></h1>
+							<div class="menu__input-group">
+								<label class="menu_label" for="base-number"></label>
+								<input
+									class="menu_input"
+									type="text"
+									name="base-number"
+								/>
+							</div>
+							<button class="menu__button button">New Game</button>
+						</div>
+					</div>
+				</div>
 
-            <div class="menu">
-                <div class="container">
-                    <div class="menu-wrapper">
-                    <h1 class="menu__title">2048<span>+</span></h1>
-                    <div class="menu__input-group">
-                        <label class="menu_label" for="base-number"></label>
-                        <input class="menu_input" type="text" name="base-number">
-                    </div>
-                    <button class="menu__button button">New Game</button>
-                </div>
-                </div>
-            </div>
+				<div class="game-over">
+					<div class="overlay"></div>
+					<div class="container">
+						<div class="game-over-wrapper">
+							<h2 class="game-over__result">Game Over!</h2>
+							<div class="game-over__stats">
+								<span>Score: 0000</span>
+								<span>Moves: 0000</span>
+							</div>
+							<button class="game-over__button button">
+								Keep Playing
+							</button>
+							<button class="game-over__button button">
+								Play Again
+							</button>
+						</div>
+					</div>
+				</div>
 
-            <div class="game-over">
-                <div class="overlay"></div>
-                <div class="container">
-                    <div class="game-over-wrapper">
-                        <h2 class="game-over__result">Game Over!</h2>
-                        <div class="game-over__stats">
-                            <span>Score: 0000</span>
-                            <span>Moves: 0000</span>
+				<div class="game">
+                    <div class="game-content">
+                        <div class="container">
+                            <div class="game-stats">
+                                <span>Score: 0000</span>
+                                <span>Moves: 0000</span>
+                            </div>
+                            <div class="game-grid">
+                                <div class="game-grid__tile">2</div>
+                                <div class="game-grid__tile">4</div>
+                                <div class="game-grid__tile">8</div>
+                                <div class="game-grid__tile">16</div>
+                                <div class="game-grid__tile">32</div>
+                                <div class="game-grid__tile">64</div>
+                            </div>
                         </div>
-                        <button class="game-over__button button">Keep Playing</button>
-                        <button class="game-over__button button">Play Again</button>
                     </div>
-                </div>
-            </div>
 
-            <div class="game">
-                <div class="container">
-                    <div class="game-grid">
-                        <div class="game-grid__tile">2</div>
-                        <div class="game-grid__tile">4</div>
-                        <div class="game-grid__tile">8</div>
-                        <div class="game-grid__tile">16</div>
-                        <div class="game-grid__tile">32</div>
-                        <div class="game-grid__tile">64</div>
-                    </div>
-                </div>
-
-                <div class="game-controls">
-                    <div class="container">
-                        <div class="game-controls__button">&#8249;</div>
-                        <div class="game-controls__button">&#8963;</div>
-                        <div class="game-controls__button">&#8964;</div>
-                        <div class="game-controls__button">&#8250;</div>
-                    </div>
-                </div>
-            </div>
-            
-        </main>
+					<div class="game-controls">
+						<div class="container">
+							<div class="game-controls__button">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+							<div class="game-controls__button">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+							<div class="game-controls__button">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+							<div class="game-controls__button">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
 	</body>
 </html>
