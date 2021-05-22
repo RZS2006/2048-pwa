@@ -1,3 +1,5 @@
+/* Variables */
+
 :root {
 	--primary: #e7a451;
 	--primary--hover: #da9a4d;
@@ -10,7 +12,11 @@
 
 	--game-grid: #e8ddd1;
 	--game-grid-border: #9f9992;
+
+	--nav-height: 64px;
 }
+
+/* Base Styles */
 
 * {
 	margin: 0;
@@ -26,6 +32,7 @@ input {
 
 body {
 	height: 100vh;
+	max-height: 100vh;
 	color: var(--text-black);
 }
 
@@ -37,19 +44,19 @@ body {
 }
 
 .main {
-	height: calc(100vh - 64px);
+	height: calc(100vh - var(--nav-height));
 	position: relative;
 }
 
 .button {
-	background-color: var(--primary);
+	width: 100%;
+	margin-top: 10px;
+	padding: 15px 40px;
 	color: white;
 	font-weight: 600;
+	background-color: var(--primary);
 	border: none;
-	width: 100%;
-	padding: 15px 40px;
 	border-radius: 4px;
-	margin-top: 10px;
 }
 
 .button:hover {
@@ -60,7 +67,7 @@ body {
 /* Nav */
 
 .nav {
-	height: 64px;
+	height: var(--nav-height);
 	background-color: var(--bg-gray);
 }
 
