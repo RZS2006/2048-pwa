@@ -54,6 +54,7 @@ const INITIAL_TILES = 2;
 
 let currentPage = PAGES.menu;
 let gameIsRunning = false;
+let gameIsOver = false;
 
 let grid;
 let baseNumberGbl;
@@ -78,6 +79,7 @@ const newGame = (baseNumber, hasPoints) => {
 
 const setUpGame = () => {
 	gameIsRunning = true;
+	gameIsOver = false;
 	grid = newGrid(GRID_SIZE);
 	score = 0;
 	moves = 0;
@@ -105,6 +107,8 @@ const addRandomNumber = () => {
 const gameOver = (result) => {
 	hideElement(gameOverSection, false);
 	currentPage = PAGES.gameOver;
+	gameIsRunning = false;
+	gameIsOver = true;
 
 	if (result === GAME_RESULTS.win) {
 		hideElement(gameOverKeepPlayingBtn, false);
@@ -114,7 +118,6 @@ const gameOver = (result) => {
 		hideElement(gameOverKeepPlayingBtn, true);
 		hideElement(gameOverKeepPlayingBtn, true);
 		setInnerText(gameOverResult, 'Game Over!');
-		gameIsRunning = false;
 	}
 };
 
@@ -197,7 +200,7 @@ navGameLink.addEventListener('click', () => {
 	hideElement(navGameLink, true);
 	hideElement(navMenuLink, false);
 	hideElement(menuSection, true);
-	hideElement(gameOverSection, true);
+	hideElement(gameOverSection, !gameIsOver);
 
 	currentPage = PAGES.game;
 });
@@ -230,6 +233,7 @@ gameOverKeepPlayingBtn.addEventListener('click', () => {
 	hideElement(gameOverSection, true);
 	currentPage = PAGES.game;
 	gameIsRunning = true;
+	gameIsOver = false;
 });
 
 gameOverPlayAgainBtn.addEventListener('click', () => {
