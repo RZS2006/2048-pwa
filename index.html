@@ -1,115 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>2048+ | 2048 Game PWA</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./styles/main.css" />
+	</head>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>2048+ | 2048 Game PWA</title>
-	<link rel="preconnect" href="https://fonts.gstatic.com" />
-	<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet" />
-	<link rel="stylesheet" href="./styles/main.css" />
-</head>
-
-<body>
-	<nav class="nav">
-		<div class="container">
-			<span class="nav__back-link nav__back-link--menu" id="nav__menu-link">&#8249; Menu</span>
-			<span class="nav__back-link nav__back-link--game" id="nav__game-link">&#8249; Game</span>
-			<span class="nav__best-score">Best Score: <span id="nav__best-score">0000</span><span>
-		</div>
-	</nav>
-
-	<main class="main">
-		<section class="menu" id="menu-section">
+	<body>
+		<nav class="nav">
 			<div class="container">
-				<div class="menu-wrapper">
-					<h1 class="menu__title">2048<span>+</span></h1>
-					<div class="menu__input-group">
-						<label class="menu_label" for="base-number">Base Number</label>
-						<select class="menu_input" type="text" name="base-number" id="menu__base-number-select">
-							<option value="base-number-2">2</option>
-							<option value="base-number-3">3</option>
-							<option value="base-number-5">5</option>
-						</select>
-					</div>
-					<button class="menu__button button" id="menu__new-game-btn">New Game</button>
-				</div>
+				<span
+					class="nav__back-link nav__back-link--menu"
+					id="nav__menu-link"
+					>&#8249; Menu</span
+				>
+				<span
+					class="nav__back-link nav__back-link--game"
+					id="nav__game-link"
+					>&#8249; Game</span
+				>
+				<span class="nav__best-score"
+					>Best Score: <span id="nav__best-score">0000</span></span
+				>
 			</div>
-		</section>
+		</nav>
 
-		<section class="game-over" id="game-over-section">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="game-over-wrapper">
-					<h2 class="game-over__result" id="game-over__result">Game Over!</h2>
-					<div class="game-over__stats">
-						<span>Score: <span id="game-over__score">0000</span></span>
-						<span>Moves: <span id="game-over__moves">0000</span></span>
-					</div>
-					<button class="game-over__button button" id="game-over__keep-playing-btn">
-						Keep Playing
-					</button>
-					<button class="game-over__button button" id="game-over__play-again-btn">
-						Play Again
-					</button>
-				</div>
-			</div>
-		</section>
-
-		<section class="game">
-			<div class="game-content">
+		<main class="main">
+			<section class="menu" id="menu-section">
 				<div class="container">
-					<div class="game-stats">
-						<span>Score: <span id="game__score">0000</span></span>
-						<span>Moves: <span id="game__moves">0000</span></span>
-					</div>
-					<div class="game-grid" id="game__grid">
-						<div class="game-grid__tile">2</div>
-						<div class="game-grid__tile">4</div>
-						<div class="game-grid__tile">8</div>
-						<div class="game-grid__tile">16</div>
-						<div class="game-grid__tile">32</div>
-						<div class="game-grid__tile">64</div>
+					<div class="menu-wrapper">
+						<h1 class="menu__title">2048<span>+</span></h1>
+						<div class="menu__input-group">
+							<label class="menu_label" for="base-number"
+								>Base Number</label
+							>
+							<select
+								class="menu_input"
+								type="text"
+								name="base-number"
+								id="menu__base-number-select"
+							>
+								<option value="base-number-2">2</option>
+								<option value="base-number-3">3</option>
+								<option value="base-number-5">5</option>
+							</select>
+						</div>
+						<button
+							class="menu__button button"
+							id="menu__new-game-btn"
+						>
+							New Game
+						</button>
 					</div>
 				</div>
-			</div>
+			</section>
 
-			<div class="game-controls">
+			<section class="game-over" id="game-over-section">
+				<div class="overlay"></div>
 				<div class="container">
-					<div class="game-controls__button" id="game__left-btn">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-							<path fill-rule="evenodd"
-								d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-								clip-rule="evenodd" />
-						</svg>
-					</div>
-					<div class="game-controls__button" id="game__up-btn">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-							<path fill-rule="evenodd"
-								d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
-								clip-rule="evenodd" />
-						</svg>
-					</div>
-					<div class="game-controls__button" id="game__down-btn">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-							<path fill-rule="evenodd"
-								d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-								clip-rule="evenodd" />
-						</svg>
-					</div>
-					<div class="game-controls__button" id="game__right-btn">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-							<path fill-rule="evenodd"
-								d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-								clip-rule="evenodd" />
-						</svg>
+					<div class="game-over-wrapper">
+						<h2 class="game-over__result" id="game-over__result">
+							Game Over!
+						</h2>
+						<div class="game-over__stats">
+							<span
+								>Score:
+								<span id="game-over__score">0000</span></span
+							>
+							<span
+								>Moves:
+								<span id="game-over__moves">0000</span></span
+							>
+						</div>
+						<button
+							class="game-over__button button"
+							id="game-over__keep-playing-btn"
+						>
+							Keep Playing
+						</button>
+						<button
+							class="game-over__button button"
+							id="game-over__play-again-btn"
+						>
+							Play Again
+						</button>
 					</div>
 				</div>
-			</div>
-		</section>
-	</main>
-	<script src="./js/app.js"></script>
-</body>
+			</section>
 
+			<section class="game">
+				<div class="game-content">
+					<div class="container">
+						<div class="game-stats">
+							<span
+								>Score: <span id="game__score">0000</span></span
+							>
+							<span
+								>Moves: <span id="game__moves">0000</span></span
+							>
+						</div>
+						<div class="game-grid" id="game__grid">
+							<div class="game-grid__tile">2</div>
+							<div class="game-grid__tile">4</div>
+							<div class="game-grid__tile">8</div>
+							<div class="game-grid__tile">16</div>
+							<div class="game-grid__tile">32</div>
+							<div class="game-grid__tile">64</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="game-controls">
+					<div class="container">
+						<div class="game-controls__button" id="game__left-btn">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 20 20"
+								fill="currentColor"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+						</div>
+						<div class="game-controls__button" id="game__up-btn">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 20 20"
+								fill="currentColor"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+						</div>
+						<div class="game-controls__button" id="game__down-btn">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 20 20"
+								fill="currentColor"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+						</div>
+						<div class="game-controls__button" id="game__right-btn">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 20 20"
+								fill="currentColor"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<script src="./js/app.js"></script>
+	</body>
 </html>
