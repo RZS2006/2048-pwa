@@ -42,8 +42,24 @@ const GAME_RESULTS = {
 	loss: 'GAME_LOSS',
 };
 
+const MOVE_DIRECTIONS = {
+	left: 'MOVE_LEFT',
+	up: 'MOVE_UP',
+	down: 'MOVE_DOWN',
+	right: 'MOVE_RIGHT',
+};
+
+const GRID_SIZE = 4;
+const INITIAL_TILES = 2;
+
 let currentPage = PAGES.menu;
 let gameIsRunning = false;
+
+let grid;
+let baseNumberGbl;
+let hasPointsGbl;
+let score = 0;
+let moves = 0;
 
 // Functions
 
@@ -54,9 +70,36 @@ const newGame = (baseNumber, hasPoints) => {
 	hideElement(gameOverSection, true);
 
 	currentPage = PAGES.game;
-	gameIsRunning = true;
+	baseNumberGbl = baseNumber;
+	hasPointsGbl = hasPoints;
 
-	console.log(baseNumber, `Has${hasPoints ? '' : ' no'} points`);
+	setUpGame();
+};
+
+const setUpGame = () => {
+	gameIsRunning = true;
+	grid = newGrid(GRID_SIZE);
+	score = 0;
+	moves = 0;
+
+	addInitialTiles(INITIAL_TILES);
+	actuateGrid();
+};
+
+const addInitialTiles = (amount) => {
+	for (i = 0; i < amount; i++) {
+		addRandomNumber();
+	}
+};
+
+const addRandomNumber = () => {
+	if (availableCells().length) {
+		let randomIndex = Math.floor(Math.random() * availableCells().length);
+		let randomTile = availableCells()[randomIndex];
+
+		grid[randomTile.x][randomTile.y] =
+			Math.random() > 0.1 ? baseNumberGbl : baseNumberGbl * 2;
+	}
 };
 
 const gameOver = (result) => {
@@ -74,6 +117,62 @@ const gameOver = (result) => {
 		gameIsRunning = false;
 	}
 };
+
+const actuateGrid = () => {
+	gameGrid.innerHTML = '';
+
+	for (let i = 0; i < GRID_SIZE; i++) {
+		for (let j = 0; j < GRID_SIZE; j++) {
+			let tileValue = grid[i][j];
+			let tileClass =
+				Math.log(tileValue / baseNumberGbl) / Math.log(2) + 1;
+
+			let tileElement = document.createElement('div');
+
+			if (tileValue !== 0) {
+				tileElement.classList.add('game-grid__tile');
+				tileElement.classList.add(`tile--${tileClass.toString()}`);
+				tileElement.innerText = tileValue;
+			}
+
+			gameGrid.appendChild(tileElement);
+		}
+	}
+};
+
+// Grid Functions
+
+const newGrid = (size) => {
+	let emptyGrid = [];
+
+	for (let i = 0; i < size; i++) {
+		let row = [];
+
+		for (let j = 0; j < size; j++) {
+			row.push(0);
+		}
+
+		emptyGrid.push(row);
+	}
+
+	return emptyGrid;
+};
+
+const availableCells = () => {
+	let options = [];
+
+	for (let i = 0; i < GRID_SIZE; i++) {
+		for (let j = 0; j < GRID_SIZE; j++) {
+			if (grid[i][j] === 0) {
+				options.push({ x: i, y: j });
+			}
+		}
+	}
+
+	return options;
+};
+
+// DOM Functions
 
 const hideElement = (element, hidden) => {
 	hidden
@@ -129,11 +228,15 @@ menuNewGameBtn.addEventListener('click', () => {
 
 gameOverKeepPlayingBtn.addEventListener('click', () => {
 	hideElement(gameOverSection, true);
+	currentPage = PAGES.game;
+	gameIsRunning = true;
 });
 
 gameOverPlayAgainBtn.addEventListener('click', () => {
 	hideElement(gameOverSection, true);
-	newGame(2, true);
+	currentPage = PAGES.game;
+
+	setUpGame();
 });
 
 document.addEventListener('keyup', (e) => {
