@@ -104,6 +104,33 @@ const addRandomNumber = () => {
 	}
 };
 
+const gameMove = (direction) => {
+	switch (direction) {
+		case MOVE_DIRECTIONS.left:
+			for (let i = 0; i < grid.length; i++) {
+				grid[i] = operateMove(grid[i]);
+			}
+			break;
+		case MOVE_DIRECTIONS.up:
+			for (let i = 0; i < grid.length; i++) {
+				grid[i] = operateMove(grid[i]);
+			}
+			break;
+		case MOVE_DIRECTIONS.down:
+			for (let i = 0; i < grid.length; i++) {
+				grid[i] = operateMove(grid[i]);
+			}
+			break;
+		case MOVE_DIRECTIONS.right:
+			for (let i = 0; i < grid.length; i++) {
+				grid[i] = operateMove(grid[i]);
+			}
+			break;
+	}
+
+	actuateGrid();
+};
+
 const gameOver = (result) => {
 	hideElement(gameOverSection, false);
 	currentPage = PAGES.gameOver;
@@ -119,6 +146,37 @@ const gameOver = (result) => {
 		hideElement(gameOverKeepPlayingBtn, true);
 		setInnerText(gameOverResult, 'Game Over!');
 	}
+};
+
+const operateMove = (row) => {
+	row = slideRow(row);
+	row = combineRow(row);
+	row = slideRow(row);
+	return row;
+};
+
+const slideRow = (row) => {
+	let filteredRow = row.filter((tile) => tile !== 0);
+	let zeroRow = Array(row.length - filteredRow.length).fill(0);
+	let newRow = zeroRow.concat(filteredRow);
+	return newRow;
+};
+
+const combineRow = (row) => {
+	for (let i = row.length - 1; i >= 1; i--) {
+		let tileA = row[i];
+		let tileB = row[i - 1];
+
+		if (tileA === tileB) {
+			let combinedTotal = tileA + tileB;
+			row[i] = combinedTotal;
+			row[i - 1] = 0;
+
+			score += combinedTotal;
+			console.log(score);
+		}
+	}
+	return row;
 };
 
 const actuateGrid = () => {
@@ -159,6 +217,16 @@ const newGrid = (size) => {
 	}
 
 	return emptyGrid;
+};
+
+const copyGrid = (grid) => {
+	let copiedGrid = newGrid(grid.length);
+	for (let i = 0; i < grid.length; i++) {
+		for (let j = 0; i < grid.length; j++) {
+			copiedGrid[i][j] = grid[i][j];
+		}
+	}
+	return copiedGrid;
 };
 
 const availableCells = () => {
@@ -249,21 +317,25 @@ document.addEventListener('keyup', (e) => {
 	switch (e.code) {
 		case 'ArrowLeft':
 		case 'KeyA':
-			console.log('left');
-			gameOver(GAME_RESULTS.win);
+			gameMove(MOVE_DIRECTIONS.left);
+			// console.log('left');
+			// gameOver(GAME_RESULTS.win);
 			break;
 		case 'ArrowUp':
 		case 'KeyW':
-			console.log('up');
-			gameOver(GAME_RESULTS.loss);
+			gameMove(MOVE_DIRECTIONS.up);
+			// console.log('up');
+			// gameOver(GAME_RESULTS.loss);
 			break;
 		case 'ArrowDown':
 		case 'KeyS':
-			console.log('down');
+			gameMove(MOVE_DIRECTIONS.down);
+			// console.log('down');
 			break;
 		case 'ArrowRight':
 		case 'KeyD':
-			console.log('right');
+			gameMove(MOVE_DIRECTIONS.right);
+			// console.log('right');
 			break;
 		default:
 			return;
@@ -271,21 +343,25 @@ document.addEventListener('keyup', (e) => {
 });
 
 gameLeftBtn.addEventListener('click', () => {
-	if (currentPage !== PAGES.game || !gameIsRunning) return;
-	console.log('left');
+	if (!gameIsRunning) return;
+	gameMove(MOVE_DIRECTIONS.left);
+	// console.log('left');
 });
 
 gameUpBtn.addEventListener('click', () => {
-	if (currentPage !== PAGES.game || !gameIsRunning) return;
-	console.log('up');
+	if (!gameIsRunning) return;
+	gameMove(MOVE_DIRECTIONS.up);
+	// console.log('up');
 });
 
 gameDownBtn.addEventListener('click', () => {
-	if (currentPage !== PAGES.game || !gameIsRunning) return;
-	console.log('down');
+	if (!gameIsRunning) return;
+	gameMove(MOVE_DIRECTIONS.down);
+	// console.log('down');
 });
 
 gameRightBtn.addEventListener('click', () => {
-	if (currentPage !== PAGES.game || !gameIsRunning) return;
-	console.log('right');
+	if (!gameIsRunning) return;
+	gameMove(MOVE_DIRECTIONS.right);
+	// console.log('right');
 });
