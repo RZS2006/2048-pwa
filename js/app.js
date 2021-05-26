@@ -1,3 +1,9 @@
+// Imports
+
+import { PAGES, GAME_RESULTS, MOVE_DIRECTIONS } from './constants.js';
+import { hideElement, setInnerText } from './dom.js';
+import { newGrid, copyGrid } from './grid.js';
+
 // Selectors
 
 const navMenuLink = document.querySelector('#nav__menu-link');
@@ -30,24 +36,6 @@ const gameDownBtn = document.querySelector('#game__down-btn');
 const gameRightBtn = document.querySelector('#game__right-btn');
 
 // Globals
-
-const PAGES = {
-	game: 'GAME_PAGE',
-	menu: 'MENU_PAGE',
-	gameOver: 'GAME_OVER_PAGE',
-};
-
-const GAME_RESULTS = {
-	win: 'GAME_WIN',
-	loss: 'GAME_LOSS',
-};
-
-const MOVE_DIRECTIONS = {
-	left: 'MOVE_LEFT',
-	up: 'MOVE_UP',
-	down: 'MOVE_DOWN',
-	right: 'MOVE_RIGHT',
-};
 
 const GRID_SIZE = 4;
 const INITIAL_TILES = 2;
@@ -84,12 +72,15 @@ const setUpGame = () => {
 	score = 0;
 	moves = 0;
 
+	setInnerText(gameScore, score);
+	setInnerText(gameMoves, moves);
+
 	addInitialTiles(INITIAL_TILES);
 	actuateGrid();
 };
 
 const addInitialTiles = (amount) => {
-	for (i = 0; i < amount; i++) {
+	for (let i = 0; i < amount; i++) {
 		addRandomNumber();
 	}
 };
@@ -128,6 +119,11 @@ const gameMove = (direction) => {
 			break;
 	}
 
+	moves += 1;
+
+	setInnerText(gameScore, score);
+	setInnerText(gameMoves, moves);
+
 	actuateGrid();
 };
 
@@ -146,6 +142,9 @@ const gameOver = (result) => {
 		hideElement(gameOverKeepPlayingBtn, true);
 		setInnerText(gameOverResult, 'Game Over!');
 	}
+
+	setInnerText(gameOverScore, score);
+	setInnerText(gameOverMoves, moves);
 };
 
 const operateMove = (row) => {
@@ -173,7 +172,6 @@ const combineRow = (row) => {
 			row[i - 1] = 0;
 
 			score += combinedTotal;
-			console.log(score);
 		}
 	}
 	return row;
@@ -203,32 +201,6 @@ const actuateGrid = () => {
 
 // Grid Functions
 
-const newGrid = (size) => {
-	let emptyGrid = [];
-
-	for (let i = 0; i < size; i++) {
-		let row = [];
-
-		for (let j = 0; j < size; j++) {
-			row.push(0);
-		}
-
-		emptyGrid.push(row);
-	}
-
-	return emptyGrid;
-};
-
-const copyGrid = (grid) => {
-	let copiedGrid = newGrid(grid.length);
-	for (let i = 0; i < grid.length; i++) {
-		for (let j = 0; i < grid.length; j++) {
-			copiedGrid[i][j] = grid[i][j];
-		}
-	}
-	return copiedGrid;
-};
-
 const availableCells = () => {
 	let options = [];
 
@@ -241,18 +213,6 @@ const availableCells = () => {
 	}
 
 	return options;
-};
-
-// DOM Functions
-
-const hideElement = (element, hidden) => {
-	hidden
-		? element.classList.add('hidden')
-		: element.classList.remove('hidden');
-};
-
-const setInnerText = (element, text) => {
-	element.innerText = text;
 };
 
 // Event Listeners
