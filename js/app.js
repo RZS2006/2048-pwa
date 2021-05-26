@@ -195,7 +195,9 @@ const actuateGrid = () => {
 
 			if (tileValue !== 0) {
 				tileElement.classList.add('game-grid__tile');
-				tileElement.classList.add(`tile--${tileClass.toString()}`);
+				tileElement.classList.add(
+					`tile--${tileValue < 2048 ? tileClass.toString() : 'over'}`
+				);
 				tileElement.innerText = tileValue;
 			}
 

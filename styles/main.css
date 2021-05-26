@@ -13,6 +13,16 @@
 	--game-grid: #e8ddd1;
 	--game-grid-border: #9f9992;
 
+	--tile-class-1: #f5e3c1;
+	--tile-class-2: #f7daa4;
+	--tile-class-3: #ffc48d;
+	--tile-class-4: #ff9a62;
+	--tile-class-5: #ff7e62;
+	--tile-class-6: #ffbb56;
+	--tile-class-7: #ffc93e;
+	--tile-class-8: #ffd233;
+	--tile-class-over: rgb(6, 2, 24);
+
 	--nav-height: 64px;
 }
 
@@ -241,6 +251,57 @@ body {
 	font-size: 1.4rem;
 	border-radius: 4px;
 	margin: 4px;
+}
+
+.tile--1 {
+	background-color: var(--tile-class-1);
+	color: var(--text-black);
+}
+
+.tile--2 {
+	background-color: var(--tile-class-2);
+	color: var(--text-black);
+}
+
+.tile--3 {
+	background-color: var(--tile-class-3);
+}
+
+.tile--4 {
+	background-color: var(--tile-class-4);
+}
+
+.tile--5 {
+	background-color: var(--tile-class-5);
+}
+
+.tile--6 {
+	background-color: var(--tile-class-6);
+}
+
+.tile--7 {
+	background-color: var(--tile-class-7);
+}
+
+.tile--8 {
+	background-color: var(--tile-class-8);
+}
+
+.tile--9 {
+	background-color: var(--tile-class-8);
+}
+
+.tile--10 {
+	background-color: var(--tile-class-8);
+}
+
+.tile--11 {
+	background-color: var(--tile-class-8);
+}
+
+.tile--over {
+	background-color: var(--tile-class-over);
+	font-size: 1rem;
 }
 
 .game-controls {
