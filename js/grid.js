@@ -23,3 +23,15 @@ export const copyGrid = (grid) => {
 
 	return copiedGrid;
 };
+
+export const equalGrids = (gridA, gridB) => {
+	for (let i = 0; i < gridA.length; i++) {
+		for (let j = 0; j < gridA.length; j++) {
+			if (gridA[i][j] !== gridB[i][j]) {
+				return false;
+			}
+		}
+	}
+
+	return true;
+};

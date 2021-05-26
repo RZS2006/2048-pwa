@@ -2,7 +2,7 @@
 
 import { PAGES, GAME_RESULTS, MOVE_DIRECTIONS } from './constants.js';
 import { hideElement, setInnerText } from './dom.js';
-import { newGrid, copyGrid } from './grid.js';
+import { newGrid, copyGrid, equalGrids } from './grid.js';
 
 // Selectors
 
@@ -96,6 +96,8 @@ const addRandomNumber = () => {
 };
 
 const gameMove = (direction) => {
+	let previousGrid = copyGrid(grid);
+
 	switch (direction) {
 		case MOVE_DIRECTIONS.left:
 			for (let i = 0; i < grid.length; i++) {
@@ -119,7 +121,10 @@ const gameMove = (direction) => {
 			break;
 	}
 
-	moves += 1;
+	if (!equalGrids(previousGrid, grid)) {
+		moves += 1;
+		addRandomNumber();
+	}
 
 	setInnerText(gameScore, score);
 	setInnerText(gameMoves, moves);
