@@ -147,6 +147,14 @@ const gameMove = (direction) => {
 	setInnerText(gameMoves, moves);
 
 	actuateGrid();
+
+	if (checkGameWin(grid)) {
+		gameOver(GAME_RESULTS.win);
+	}
+
+	if (checkGameLoss(grid)) {
+		gameOver(GAME_RESULTS.loss);
+	}
 };
 
 const gameOver = (result) => {
@@ -221,6 +229,22 @@ const actuateGrid = () => {
 			gameGrid.appendChild(tileElement);
 		}
 	}
+};
+
+const checkGameWin = (grid) => {
+	for (let i = 0; i < grid.length; i++) {
+		for (let j = 0; j < grid.length; j++) {
+			if (grid[i][j] === Math.pow(baseNumberGbl, 11)) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+};
+
+const checkGameLoss = (grid) => {
+	return false;
 };
 
 // Grid Functions
