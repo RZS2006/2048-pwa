@@ -8,7 +8,9 @@ import {
 	equalGrids,
 	flipGrid,
 	transposeGrid,
+	availableCells,
 } from './grid.js';
+import { checkGameWin, checkGameLoss } from './game.js';
 
 // Selectors
 
@@ -93,9 +95,11 @@ const addInitialTiles = (amount) => {
 };
 
 const addRandomNumber = () => {
-	if (availableCells().length) {
-		let randomIndex = Math.floor(Math.random() * availableCells().length);
-		let randomTile = availableCells()[randomIndex];
+	if (availableCells(grid).length) {
+		let randomIndex = Math.floor(
+			Math.random() * availableCells(grid).length
+		);
+		let randomTile = availableCells(grid)[randomIndex];
 
 		grid[randomTile.x][randomTile.y] =
 			Math.random() > 0.1 ? baseNumberGbl : baseNumberGbl * 2;
@@ -157,7 +161,7 @@ const gameMove = (direction) => {
 
 	actuateGrid();
 
-	if (checkGameWin(grid)) {
+	if (checkGameWin(grid, baseNumberGbl)) {
 		gameOver(GAME_RESULTS.win);
 	}
 
@@ -190,6 +194,7 @@ const operateMove = (row) => {
 	row = slideRow(row);
 	row = combineRow(row);
 	row = slideRow(row);
+
 	return row;
 };
 
@@ -197,6 +202,7 @@ const slideRow = (row) => {
 	let filteredRow = row.filter((tile) => tile !== 0);
 	let zeroRow = Array(row.length - filteredRow.length).fill(0);
 	let newRow = zeroRow.concat(filteredRow);
+
 	return newRow;
 };
 
@@ -213,6 +219,7 @@ const combineRow = (row) => {
 			score += combinedTotal;
 		}
 	}
+
 	return row;
 };
 
@@ -238,48 +245,6 @@ const actuateGrid = () => {
 			gameGrid.appendChild(tileElement);
 		}
 	}
-};
-
-const checkGameWin = (grid) => {
-	for (let i = 0; i < grid.length; i++) {
-		for (let j = 0; j < grid.length; j++) {
-			if (grid[i][j] === Math.pow(baseNumberGbl, 11)) {
-				return true;
-			}
-		}
-	}
-
-	return false;
-};
-
-const checkGameLoss = (grid) => {
-	for (let i = 0; i < grid.length; i++) {
-		for (let j = 0; j < grid.length; j++) {
-			let tile = grid[i][j];
-
-			if (tile === 0) return false;
-			if (i !== grid.length - 1 && tile === grid[i + 1][j]) return false;
-			if (j !== grid.length - 1 && tile === grid[i][j + 1]) return false;
-		}
-	}
-
-	return true;
-};
-
-// Grid Functions
-
-const availableCells = () => {
-	let options = [];
-
-	for (let i = 0; i < GRID_SIZE; i++) {
-		for (let j = 0; j < GRID_SIZE; j++) {
-			if (grid[i][j] === 0) {
-				options.push({ x: i, y: j });
-			}
-		}
-	}
-
-	return options;
 };
 
 // Local Storage Functions

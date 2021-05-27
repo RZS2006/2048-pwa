@@ -55,3 +55,17 @@ export const transposeGrid = (grid) => {
 
 	return transposedGrid;
 };
+
+export const availableCells = (grid) => {
+	let options = [];
+
+	for (let i = 0; i < grid.length; i++) {
+		for (let j = 0; j < grid.length; j++) {
+			if (grid[i][j] === 0) {
+				options.push({ x: i, y: j });
+			}
+		}
+	}
+
+	return options;
+};
