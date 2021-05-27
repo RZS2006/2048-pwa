@@ -2,7 +2,13 @@
 
 import { PAGES, GAME_RESULTS, MOVE_DIRECTIONS } from './constants.js';
 import { hideElement, setInnerText } from './dom.js';
-import { newGrid, copyGrid, equalGrids } from './grid.js';
+import {
+	newGrid,
+	copyGrid,
+	equalGrids,
+	flipGrid,
+	transposeGrid,
+} from './grid.js';
 
 // Selectors
 
@@ -100,24 +106,35 @@ const gameMove = (direction) => {
 
 	switch (direction) {
 		case MOVE_DIRECTIONS.left:
-			for (let i = 0; i < grid.length; i++) {
-				grid[i] = operateMove(grid[i]);
-			}
+			grid = flipGrid(grid);
 			break;
 		case MOVE_DIRECTIONS.up:
-			for (let i = 0; i < grid.length; i++) {
-				grid[i] = operateMove(grid[i]);
-			}
+			grid = transposeGrid(grid);
+			grid = flipGrid(grid);
 			break;
 		case MOVE_DIRECTIONS.down:
-			for (let i = 0; i < grid.length; i++) {
-				grid[i] = operateMove(grid[i]);
-			}
+			grid = transposeGrid(grid);
 			break;
 		case MOVE_DIRECTIONS.right:
-			for (let i = 0; i < grid.length; i++) {
-				grid[i] = operateMove(grid[i]);
-			}
+			break;
+	}
+
+	for (let i = 0; i < grid.length; i++) {
+		grid[i] = operateMove(grid[i]);
+	}
+
+	switch (direction) {
+		case MOVE_DIRECTIONS.left:
+			grid = flipGrid(grid);
+			break;
+		case MOVE_DIRECTIONS.up:
+			grid = flipGrid(grid);
+			grid = transposeGrid(grid);
+			break;
+		case MOVE_DIRECTIONS.down:
+			grid = transposeGrid(grid);
+			break;
+		case MOVE_DIRECTIONS.right:
 			break;
 	}
 
@@ -285,24 +302,18 @@ document.addEventListener('keyup', (e) => {
 		case 'ArrowLeft':
 		case 'KeyA':
 			gameMove(MOVE_DIRECTIONS.left);
-			// console.log('left');
-			// gameOver(GAME_RESULTS.win);
 			break;
 		case 'ArrowUp':
 		case 'KeyW':
 			gameMove(MOVE_DIRECTIONS.up);
-			// console.log('up');
-			// gameOver(GAME_RESULTS.loss);
 			break;
 		case 'ArrowDown':
 		case 'KeyS':
 			gameMove(MOVE_DIRECTIONS.down);
-			// console.log('down');
 			break;
 		case 'ArrowRight':
 		case 'KeyD':
 			gameMove(MOVE_DIRECTIONS.right);
-			// console.log('right');
 			break;
 		default:
 			return;
@@ -312,23 +323,19 @@ document.addEventListener('keyup', (e) => {
 gameLeftBtn.addEventListener('click', () => {
 	if (!gameIsRunning) return;
 	gameMove(MOVE_DIRECTIONS.left);
-	// console.log('left');
 });
 
 gameUpBtn.addEventListener('click', () => {
 	if (!gameIsRunning) return;
 	gameMove(MOVE_DIRECTIONS.up);
-	// console.log('up');
 });
 
 gameDownBtn.addEventListener('click', () => {
 	if (!gameIsRunning) return;
 	gameMove(MOVE_DIRECTIONS.down);
-	// console.log('down');
 });
 
 gameRightBtn.addEventListener('click', () => {
 	if (!gameIsRunning) return;
 	gameMove(MOVE_DIRECTIONS.right);
-	// console.log('right');
 });

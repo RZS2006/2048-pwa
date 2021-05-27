@@ -35,3 +35,23 @@ export const equalGrids = (gridA, gridB) => {
 
 	return true;
 };
+
+export const flipGrid = (grid) => {
+	for (let i = 0; i < grid.length; i++) {
+		grid[i].reverse();
+	}
+
+	return grid;
+};
+
+export const transposeGrid = (grid) => {
+	let transposedGrid = newGrid(grid.length);
+
+	for (let i = 0; i < grid.length; i++) {
+		for (let j = 0; j < grid.length; j++) {
+			transposedGrid[i][j] = grid[j][i];
+		}
+	}
+
+	return transposedGrid;
+};
