@@ -53,6 +53,7 @@ let gameIsOver = false;
 let grid;
 let baseNumberGbl;
 let hasPointsGbl;
+let bestScore = 0;
 let score = 0;
 let moves = 0;
 
@@ -145,6 +146,14 @@ const gameMove = (direction) => {
 
 	setInnerText(gameScore, score);
 	setInnerText(gameMoves, moves);
+
+	if (hasPointsGbl) {
+		if (score > bestScore) {
+			bestScore = score;
+			setInnerText(navBestScore, bestScore);
+			localStorage.setItem('2048-pwa_best-score', bestScore);
+		}
+	}
 
 	actuateGrid();
 
@@ -273,12 +282,26 @@ const availableCells = () => {
 	return options;
 };
 
+// Local Storage Functions
+
+const getBestScoreLocalStorage = () => {
+	let data = localStorage.getItem('2048-pwa_best-score');
+
+	if (data) {
+		bestScore = parseInt(data);
+	}
+
+	setInnerText(navBestScore, bestScore);
+};
+
 // Event Listeners
 
 document.addEventListener('DOMContentLoaded', () => {
 	// Navigate to menu
 	hideElement(navMenuLink, true);
 	hideElement(gameOverSection, true);
+
+	getBestScoreLocalStorage();
 });
 
 navGameLink.addEventListener('click', () => {
