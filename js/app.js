@@ -244,7 +244,17 @@ const checkGameWin = (grid) => {
 };
 
 const checkGameLoss = (grid) => {
-	return false;
+	for (let i = 0; i < grid.length; i++) {
+		for (let j = 0; j < grid.length; j++) {
+			let tile = grid[i][j];
+
+			if (tile === 0) return false;
+			if (i !== grid.length - 1 && tile === grid[i + 1][j]) return false;
+			if (j !== grid.length - 1 && tile === grid[i][j + 1]) return false;
+		}
+	}
+
+	return true;
 };
 
 // Grid Functions
