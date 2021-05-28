@@ -1,0 +1,27 @@
+{
+	"name": "2048+",
+	"short_name": "2048+",
+	"theme_color": "#e7a451",
+	"background_color": "#ffffff",
+	"display": "standalone",
+	"orientation": "portrait",
+	"scope": "/",
+	"start_url": "/index.html",
+	"icons": [
+		{
+			"src": "/img/icons/icon-512.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		},
+		{
+			"src": "/img/icons/icon-192.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		},
+		{
+			"src": "/img/icons/icon-72.png",
+			"type": "image/png",
+			"sizes": "72x72"
+		}
+	]
+}
