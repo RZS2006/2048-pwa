@@ -1,4 +1,4 @@
-const cacheName = '2048-pwa_static-v4';
+const cacheName = '2048-pwa_static-v6';
 const cacheFiles = [
 	'/',
 	'/index.html',

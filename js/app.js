@@ -262,6 +262,7 @@ const getBestScoreLocalStorage = () => {
 // Event Listeners
 
 document.addEventListener('DOMContentLoaded', () => {
+	hideElement(navMenuLink, true);
 	getBestScoreLocalStorage();
 });
 
