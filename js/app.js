@@ -262,10 +262,6 @@ const getBestScoreLocalStorage = () => {
 // Event Listeners
 
 document.addEventListener('DOMContentLoaded', () => {
-	// Navigate to menu
-	hideElement(navMenuLink, true);
-	hideElement(gameOverSection, true);
-
 	getBestScoreLocalStorage();
 });
 
