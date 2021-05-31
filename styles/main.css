@@ -21,6 +21,7 @@
 	--tile-class-6: #ffbb56;
 	--tile-class-7: #ffc93e;
 	--tile-class-8: #ffd233;
+	--tile-class-8-rgb: 255, 210, 51;
 	--tile-class-over: rgb(6, 2, 24);
 
 	--nav-height: 64px;
@@ -290,14 +291,17 @@ body {
 
 .tile--9 {
 	background-color: var(--tile-class-8);
+	box-shadow: 0 0 10px 0 rgba(var(--tile-class-8-rgb), 0.2);
 }
 
 .tile--10 {
 	background-color: var(--tile-class-8);
+	box-shadow: 0 0 20px 0 rgba(var(--tile-class-8-rgb), 0.4);
 }
 
 .tile--11 {
 	background-color: var(--tile-class-8);
+	box-shadow: 0 0 30px 0 rgba(var(--tile-class-8-rgb), 0.8);
 }
 
 .tile--over {
